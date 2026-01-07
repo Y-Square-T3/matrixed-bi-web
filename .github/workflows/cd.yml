@@ -13,10 +13,17 @@ on:
       - main
     types:
       - closed
+  workflow_run:
+    workflows: ["MBI CI"]
+    types:
+      - completed
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
 
     strategy:
       matrix:
