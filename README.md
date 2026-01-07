@@ -1,4 +1,5 @@
-[![Build Matrixed BI](https://github.com/Y-Square-T3/matrixed-bi-web/actions/workflows/build.yml/badge.svg)](https://github.com/Y-Square-T3/matrixed-bi-web/actions/workflows/build.yml)
+[![MBI CI](https://github.com/Y-Square-T3/matrixed-bi-web/actions/workflows/ci.yml/badge.svg)](https://github.com/Y-Square-T3/matrixed-bi-web/actions/workflows/ci.yml)
+[![MBI CD](https://github.com/Y-Square-T3/matrixed-bi-web/actions/workflows/cd.yml/badge.svg)](https://github.com/Y-Square-T3/matrixed-bi-web/actions/workflows/cd.yml)
 
 # Matrixed BI Web
 
