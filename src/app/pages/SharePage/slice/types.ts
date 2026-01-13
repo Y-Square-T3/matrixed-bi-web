@@ -23,6 +23,7 @@ import {
 import { ServerStoryBoard } from 'app/pages/StoryBoardPage/slice/types';
 import { SelectedItem } from 'app/types/ChartConfig';
 import { ChartDTO } from 'app/types/ChartDTO';
+import { OAuthClient } from '../../../slice/types';
 
 export interface SharePageState {
   needVerify?: boolean;
@@ -37,7 +38,7 @@ export interface SharePageState {
   pageWidthHeight: [number, number];
   shareDownloadPolling: boolean;
   loginLoading: boolean;
-  oauth2Clients: Array<{ name: string; value: string }>;
+  oauth2Clients: OAuthClient[];
   availableSourceFunctions?: string[];
   selectedItems: SelectedItem[];
   title?: string;

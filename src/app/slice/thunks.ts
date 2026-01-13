@@ -25,7 +25,7 @@ import { appActions } from '.';
 import {
   LoginParams,
   LogoutParams,
-  ModifyPasswordParams,
+  ModifyPasswordParams, OAuthClient,
   RegisterParams,
   SaveProfileParams,
   SetupParams,
@@ -178,10 +178,10 @@ export const getSystemInfo = createAsyncThunk<SystemInfo>(
   },
 );
 
-export const getOauth2Clients = createAsyncThunk<[]>(
+export const getOauth2Clients = createAsyncThunk<OAuthClient[]>(
   'app/getOauth2Clients',
   async () => {
-    const { data } = await request2<[]>({
+    const { data } = await request2<OAuthClient[]>({
       url: '/tpa/getOauth2Clients',
       method: 'GET',
     });

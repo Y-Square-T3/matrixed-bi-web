@@ -25,7 +25,7 @@ export interface AppState {
   registerLoading: boolean;
   saveProfileLoading: boolean;
   modifyPasswordLoading: boolean;
-  oauth2Clients: Array<{ name: string; value: string }>;
+  oauth2Clients: OAuthClient[];
 }
 
 export interface User {
@@ -47,6 +47,12 @@ export interface SystemInfo {
   tokenTimeout: string;
   version: string;
 }
+
+export type OAuthClient = {
+  clientId: string;
+  clientName: string;
+  authorizationUrl: string;
+};
 
 export interface ModifyUserPassword {
   oldPassword: string;

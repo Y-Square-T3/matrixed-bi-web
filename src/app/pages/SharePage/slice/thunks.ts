@@ -36,6 +36,7 @@ import persistence from 'utils/persistence';
 import { request2 } from 'utils/request';
 import { shareActions } from '.';
 import { ShareVizInfo } from './types';
+import { OAuthClient } from '../../../slice/types';
 
 export const fetchShareVizInfo = createAsyncThunk(
   'share/fetchShareVizInfo',
@@ -257,10 +258,10 @@ export const updateGroupAndFetchDatasetForShare = createAsyncThunk(
   },
 );
 
-export const getOauth2Clients = createAsyncThunk<[]>(
+export const getOauth2Clients = createAsyncThunk<OAuthClient[]>(
   'app/getOauth2Clients',
   async () => {
-    const { data } = await request2<[]>({
+    const { data } = await request2<OAuthClient[]>({
       url: '/tpa/getOauth2Clients',
       method: 'GET',
     });

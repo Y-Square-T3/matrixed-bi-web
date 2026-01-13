@@ -19,7 +19,7 @@
 import { Button, Form, Input } from 'antd';
 import * as AuthLayout from 'app/components/styles/AuthLayout';
 import usePrefixI18N from 'app/hooks/useI18NPrefix';
-import { User } from 'app/slice/types';
+import { OAuthClient, User } from 'app/slice/types';
 import { StorageKeys } from 'globalConstants';
 import React, { useCallback, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
@@ -38,7 +38,7 @@ import { AUTH_CLIENT_ICON_MAPPING } from './constants';
 interface LoginFormProps {
   loading: boolean;
   loggedInUser?: User | null;
-  oauth2Clients: Array<{ name: string; value: string }>;
+  oauth2Clients: OAuthClient[];
   registerEnable?: boolean;
   inShare?: boolean;
   onLogin?: (value) => void;
@@ -149,15 +149,15 @@ export function LoginForm({
           {oauth2Clients.length > 0 && (
             <>
               <AuthTitle>{t('authTitle')}</AuthTitle>
-              {oauth2Clients.map(({ name, value }) => (
+              {oauth2Clients.map(({ clientName, authorizationUrl }) => (
                 <AuthButton
-                  key={value}
+                  key={authorizationUrl}
                   size="large"
-                  icon={AUTH_CLIENT_ICON_MAPPING[name.toLowerCase()]}
-                  onClick={toAuthClient(value)}
+                  icon={AUTH_CLIENT_ICON_MAPPING[clientName.toLowerCase()]}
+                  onClick={toAuthClient(authorizationUrl)}
                   block
                 >
-                  {name}
+                  {clientName}
                 </AuthButton>
               ))}
             </>
