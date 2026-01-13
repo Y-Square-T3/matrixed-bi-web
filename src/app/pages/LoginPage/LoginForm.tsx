@@ -22,18 +22,17 @@ import usePrefixI18N from 'app/hooks/useI18NPrefix';
 import { OAuthClient, User } from 'app/slice/types';
 import { StorageKeys } from 'globalConstants';
 import React, { useCallback, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
 import {
-  BORDER_RADIUS,
   LINE_HEIGHT_ICON_LG,
   LINE_HEIGHT_ICON_XXL,
-  SPACE_MD,
   SPACE_XS,
 } from 'styles/StyleConstants';
 import { getToken } from 'utils/auth';
 import persistence from 'utils/persistence';
 import { AUTH_CLIENT_ICON_MAPPING } from './constants';
+import { AlreadyLoginPanel } from './components/AlreadyLoginPanel';
 
 interface LoginFormProps {
   loading: boolean;
@@ -53,15 +52,10 @@ export function LoginForm({
   onLogin,
 }: LoginFormProps) {
   const [switchUser, setSwitchUser] = useState(false);
-  const history = useHistory();
   const [form] = Form.useForm();
   const logged = !!getToken();
   const t = usePrefixI18N('login');
   const tg = usePrefixI18N('global');
-
-  const toApp = useCallback(() => {
-    history.replace('/');
-  }, [history]);
 
   const onSwitch = useCallback(() => {
     setSwitchUser(true);
@@ -83,16 +77,10 @@ export function LoginForm({
   return (
     <AuthLayout.Form>
       {logged && !switchUser && !inShare ? (
-        <>
-          <h2>{t('alreadyLoggedIn')}</h2>
-          <UserPanel onClick={toApp}>
-            <p>{loggedInUser?.username}</p>
-            <span>{t('enter')}</span>
-          </UserPanel>
-          <Button type="link" size="large" block onClick={onSwitch}>
-            {t('switch')}
-          </Button>
-        </>
+        <AlreadyLoginPanel
+          onSwitchToLogin={onSwitch}
+          loggedInUser={loggedInUser}
+        />
       ) : (
         <Form form={form} onFinish={onLogin}>
           <Form.Item
@@ -192,26 +180,5 @@ const AuthButton = styled(Button)`
 
   &:last-child {
     margin-bottom: 0;
-  }
-`;
-
-const UserPanel = styled.div`
-  display: flex;
-  padding: ${SPACE_MD};
-  margin: ${SPACE_MD} 0;
-  cursor: pointer;
-  background-color: ${p => p.theme.bodyBackground};
-  border-radius: ${BORDER_RADIUS};
-
-  &:hover {
-    background-color: ${p => p.theme.emphasisBackground};
-  }
-
-  p {
-    flex: 1;
-  }
-
-  span {
-    color: ${p => p.theme.textColorLight};
   }
 `;
