@@ -22,25 +22,32 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { selectLoginLoading, selectOauth2Clients } from '../slice/selectors';
 import { getOauth2Clients } from '../slice/thunks';
+import { getSystemInfo } from '../../../slice/thunks';
+import { selectSystemInfo } from '../../../slice/selectors';
 
 function ShareLoginModal({ visible, onChange }) {
   const dispatch = useDispatch();
   const loading = useSelector(selectLoginLoading);
   const oauth2Clients = useSelector(selectOauth2Clients);
+  const systemInfo = useSelector(selectSystemInfo);
 
   useEffect(() => {
     dispatch(getOauth2Clients());
+    dispatch(getSystemInfo());
   }, [dispatch]);
 
   return (
     visible && (
       <LoginWrapper>
-        <LoginForm
-          loading={loading}
-          oauth2Clients={oauth2Clients}
-          inShare={true}
-          onLogin={onChange}
-        />
+        {!!systemInfo && (
+          <LoginForm
+            loading={loading}
+            oauth2Clients={oauth2Clients}
+            inShare={true}
+            onLogin={onChange}
+            systemInfo={systemInfo}
+          />
+        )}
       </LoginWrapper>
     )
   );

@@ -57,13 +57,16 @@ export function LoginPage() {
   );
   return (
     <LayoutWithBrand>
-      <LoginForm
-        loading={loading}
-        loggedInUser={loggedInUser}
-        oauth2Clients={oauth2Clients}
-        registerEnable={systemInfo?.registerEnable}
-        onLogin={onLogin}
-      />
+      {!!systemInfo && (
+        <LoginForm
+          loading={loading}
+          loggedInUser={loggedInUser}
+          oauth2Clients={oauth2Clients}
+          registerEnable={systemInfo?.registerEnable}
+          onLogin={onLogin}
+          systemInfo={systemInfo}
+        />
+      )}
       <Version version={systemInfo?.version} />
     </LayoutWithBrand>
   );

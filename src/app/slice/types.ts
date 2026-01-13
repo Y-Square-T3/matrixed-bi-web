@@ -46,6 +46,8 @@ export interface SystemInfo {
   tenantManagementMode: TenantManagementMode;
   tokenTimeout: string;
   version: string;
+  oAuthAuthOnly: boolean;
+  wordBackToMixedAuth: string;
 }
 
 export type OAuthClient = {
