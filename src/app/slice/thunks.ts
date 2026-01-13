@@ -25,7 +25,8 @@ import { appActions } from '.';
 import {
   LoginParams,
   LogoutParams,
-  ModifyPasswordParams, OAuthClient,
+  ModifyPasswordParams,
+  OAuthClient,
   RegisterParams,
   SaveProfileParams,
   SetupParams,
